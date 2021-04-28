@@ -1,7 +1,7 @@
 const express = require("express");
 const fs = require('fs')
 const session = require("express-session");
-const morgan = require("morgan")
+const logger = require("morgan")
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
@@ -43,3 +43,26 @@ app.use(express.static(path.join(__dirname, "public")));
 // ROUTER
 app.use("/auth", authRouter);
 app.use("/api", apiRouter);
+
+app.use((req, res, next) => {
+    console.log("No matching request :>> ");
+    res.sendFile(__dirname + "/public/index.html");
+  });
+  
+  // ERROR HANDLING
+  app.use((req, res, next) => {
+    console.log("404");
+    res.status(404).json({ code: "not found" }); 
+  });
+  
+  app.use((err, req, res, next) => {
+    console.error("ERROR", req.method, req.path, err);
+  
+    if (!res.headersSent) {
+      const statusError = err.status || "500";
+      res.status(statusError).json(err);
+    }
+  });
+  
+  module.exports = app;
+  
