@@ -1,20 +1,22 @@
 const express = require("express");
 const fs = require('fs')
+const path = require('path')
 const session = require("express-session");
 const logger = require("morgan")
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+require("dotenv").config();
 
 
-
-
+const authRouter = require("./routes/auth.route");
+const apiRouter = require("./routes/api.route");
 
 // EXPRESS SERVER INSTANCE
 const app = express();
 
 /* MIDDLEWARES*/
 //LOGGER MIDDLEWARE
-app.use(morgan('combined'));
+app.use(logger('combined'));
 
 // SESSION MIDDLEWARE
 app.use(
