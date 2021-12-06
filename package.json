@@ -26,7 +26,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "fs": "^0.0.1-security",
-    "http-errors": "^1.8.0",
+    "http-errors": "^1.8.1",
     "path": "^0.12.7"
   },
   "devDependencies": {
